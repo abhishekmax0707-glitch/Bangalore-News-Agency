@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P9ZHTS3L');</script>
+<!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bangalore News Agency - GA4 Enterprise Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- GTM Container -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+
+    <style>
+        :root {
+            --primary: #ff6b35; --success: #10b981; --whatsapp: #25d366; --purple: #8b5cf6;
+            --dark: #1f2937; --light: #6b7280; --white: #ffffff;
+            --shadow: 0 10px 40px rgba(0,0,0,0.1); --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #fef7ee 0%, #f3e8d9 100%); color: var(--dark); line-height: 1.6; }
+        
+        .header { background: linear-gradient(135deg, var(--primary) 0%, #f97316 100%); color: white; padding: 2rem; text-align: center; box-shadow: var(--shadow); position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; }
+        
+        .nav { background: rgba(255,255,255,0.98); padding: 1rem 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.08); position: sticky; top: 120px; z-index: 99; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+        
+        .btn { padding: 1rem 2rem; border: none; border-radius: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.75rem; font-size: 1rem; text-decoration: none; position: relative; }
+        .btn-primary { background: linear-gradient(135deg, var(--primary), #f97316); color: white; box-shadow: 0 4px 15px rgba(255,107,53,0.4); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,107,53,0.5); }
+        .btn-success { background: linear-gradient(135deg, var(--success), #059669); color: white; }
+        .btn-whatsapp { background: var(--whatsapp) !important; box-shadow: 0 4px 15px rgba(37,211,102,0.4); }
+        .btn-outline { background: transparent; color: var(--primary); border: 2px solid var(--primary); }
+        .btn-download { background: linear-gradient(135deg, var(--purple), #7c3aed); color: white; box-shadow: 0 4px 15px rgba(139,92,246,0.4); }
+        .btn-badge { position: absolute; top: -5px; right: -5px; background: #f59e0b; color: white; border-radius: 50%; width: 28px; height: 28px; font-size: 0.8rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+        
+        .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+        .page { display: none; }
+        .page.active { display: block; animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .card { background: white; border-radius: 24px; padding: 2.5rem; box-shadow: var(--shadow); margin-bottom: 2rem; }
+        .brochure-banner { background: linear-gradient(135deg, var(--purple) 0%, #a78bfa 100%); color: white; padding: 1.5rem 2rem; border-radius: 20px; text-align: center; margin: 2rem 0; box-shadow: var(--shadow-lg); }
+        .brochure-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.25rem; }
+        
+        .category-tabs { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .tab-btn { padding: 0.75rem 1.5rem; border: 2px solid #e2e8f0; background: white; border-radius: 50px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; }
+        .tab-btn.active { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 5px 20px rgba(255,107,53,0.3); }
+        
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .product-card { background: white; border-radius: 20px; padding: 2rem; box-shadow: var(--shadow); cursor: pointer; transition: all 0.4s ease; border-top: 5px solid var(--primary); text-align: center; position: relative; }
+        .product-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
+        .product-image { width: 100%; height: 240px; object-fit: contain; background: linear-gradient(135deg, #f8fafc, #e2e8f0); border-radius: 16px; margin-bottom: 1.5rem; padding: 1.5rem; border: 3px solid #f1f5f9; }
+        .product-title { font-size: 1.6rem; font-weight: 800; margin-bottom: 0.75rem; }
+        .product-price { font-size: 2.5rem; font-weight: 900; background: linear-gradient(135deg, var(--primary), #f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem; }
+        .product-type { font-size: 1.1rem; color: var(--primary); font-weight: 600; padding: 0.5rem 1rem; background: rgba(255,107,53,0.1); border-radius: 20px; display: inline-block; margin-bottom: 0.5rem; }
+        
+        .form-group { margin-bottom: 1.5rem; }
+        input, textarea { width: 100%; padding: 1.25rem 1.5rem; border: 2px solid #e2e8f0; border-radius: 16px; font-size: 1rem; font-family: inherit; transition: all 0.3s ease; }
+        input:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(255,107,53,0.1); }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0; border-bottom: 1px solid #f1f5f9; }
+        .cart-total { font-size: 3rem; font-weight: 900; background: linear-gradient(135deg, var(--primary), #f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: right; margin: 2rem 0; }
+        .progress-bar { position: fixed; top: 0; left: 0; width: 0%; height: 4px; background: linear-gradient(90deg, var(--primary), var(--success)); z-index: 10000; transition: width 0.2s ease; }
+    </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P9ZHTS3L"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <div class="progress-bar" id="progress-bar"></div>
+    
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="logo">📰 Bangalore News Agency</div>
+        <p>NEWSPAPERS 📰 | MAGAZINES 📚 | Bangalore Home Delivery</p>
+    </header>
+
+    <!-- NAV -->
+    <nav class="nav">
+        <div class="nav-container">
+            <button class="btn btn-primary" onclick="showPage('login')">👤 Login</button>
+            <button class="btn btn-primary" onclick="showPage('home')">🏠 Browse</button>
+            <button class="btn btn-primary" onclick="showPage('cart')" style="position:relative;">
+                🛒 Cart <span id="cart-count">0</span><span class="btn-badge" id="cart-badge" style="display:none;"></span>
+            </button>
+            <button class="btn btn-download" onclick="downloadBrochure()">📄 Catalog</button>
+        </div>
+    </nav>
+
+    <!-- BROCHURE BANNER -->
+    <div class="container">
+        <div class="brochure-banner">
+            <div class="brochure-title">📥 Download Full Catalog</div>
+            <p style="margin:0; opacity:0.95;">Complete pricing + delivery info</p>
+            <button class="btn btn-download" onclick="downloadBrochure()" style="padding:0.75rem 1.5rem;">Download Now</button>
+        </div>
+    </div>
+
+    <!-- LOGIN -->
+    <div id="login" class="page active">
+        <div class="container">
+            <div class="card" style="max-width:450px;margin:0 auto;">
+                <h1 style="font-size:2.5rem;text-align:center;margin-bottom:2rem;">Welcome Back</h1>
+                <div class="form-group">
+                    <label>Phone/Email</label>
+                    <input type="text" id="login-email" placeholder="9845123456">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="login-password" placeholder="••••••••">
+                </div>
+                <button class="btn btn-primary" style="width:100%;font-size:1.1rem;" onclick="login()">🚀 Start Shopping</button>
+                <p style="text-align:center;margin-top:1.5rem;color:var(--light);">Demo: 9845123456 / password</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- HOME -->
+    <div id="home" class="page">
+        <div class="container">
+            <div class="category-tabs">
+                <button class="tab-btn active" onclick="filterProducts('all')">📰 All (7)</button>
+                <button class="tab-btn" onclick="filterProducts('newspaper')">📰 Newspapers (5)</button>
+                <button class="tab-btn" onclick="filterProducts('magazine')">📚 Magazines (2)</button>
+            </div>
+            <h1 style="text-align:center;font-size:3.5rem;font-weight:900;margin-bottom:1rem;background:linear-gradient(135deg,var(--primary),var(--success));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Daily & Monthly Delivery</h1>
+            <p style="text-align:center;color:var(--light);font-size:1.3rem;margin-bottom:3rem;">Starting ₹100/month | Bangalore wide</p>
+            <div class="product-grid" id="product-grid"></div>
+        </div>
+    </div>
+
+    <!-- PRODUCT VIEW -->
+    <div id="product-view" class="page">
+        <div class="container">
+            <button class="btn btn-outline" onclick="showPage('home')" style="margin-bottom:2rem;">← Back to Catalog</button>
+            <div class="card" style="max-width:800px;margin:0 auto;">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;">
+                    <div>
+                        <h1 id="product-title" style="font-size:3rem;font-weight:900;margin-bottom:1rem;"></h1>
+                        <div id="product-price" style="font-size:4rem;font-weight:900;background:linear-gradient(135deg,var(--primary),var(--success));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1.5rem;"></div>
+                        <p id="product-desc" style="color:var(--light);line-height:1.8;font-size:1.2rem;margin-bottom:2rem;"></p>
+                        <button class="btn btn-primary" onclick="showPage('offer-view')" style="width:100%;font-size:1.2rem;">🎁 View Plans</button>
+                    </div>
+                    <img id="product-image" style="width:100%;height:400px;object-fit:contain;border-radius:24px;background:linear-gradient(135deg,#f8fafc,#e2e8f0);padding:2rem;border:4px solid #f1f5f9;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OFFERS -->
+    <div id="offer-view" class="page">
+        <div class="container">
+            <button class="btn btn-outline" onclick="showPage('product-view')" style="margin-bottom:2rem;">← Back</button>
+            <div class="card">
+                <h1 id="offer-title" style="text-align:center;font-size:3rem;margin-bottom:2.5rem;">Choose Your Plan</h1>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;">
+                    <div class="card" style="background:linear-gradient(135deg,#dcfce7 0%,#bbf7d0 100%);text-align:center;position:relative;">
+                        <div style="position:absolute;top:1rem;right:1rem;background:var(--success);color:white;border-radius:50%;width:40px;height:40px;font-size:0.9rem;font-weight:700;display:flex;align-items:center;justify-content:center;">BEST</div>
+                        <h3 style="font-size:1.5rem;margin:3rem 0 1rem 0;">📅 12 Months</h3>
+                        <div style="font-size:3.5rem;font-weight:900;color:var(--success);">₹2,400</div>
+                        <button class="btn btn-success" onclick="addToCart(12)" style="width:100%;margin-top:1rem;">Add Annual</button>
+                    </div>
+                    <div class="card" style="background:linear-gradient(135deg,#fef3c7 0%,#fde68a 100%);text-align:center;">
+                        <h3 style="font-size:1.5rem;margin-bottom:1rem;">📆 6 Months</h3>
+                        <div style="font-size:2.8rem;font-weight:900;color:var(--primary);">₹1,200</div>
+                        <button class="btn btn-primary" onclick="addToCart(6)" style="width:100%;margin-top:1rem;">Add 6 Months</button>
+                    </div>
+                    <div class="card" style="background:linear-gradient(135deg,#f3f4f6 0%,#e5e7eb 100%);text-align:center;">
+                        <h3 style="font-size:1.5rem;margin-bottom:1rem;">⚡ 1 Month</h3>
+                        <div style="font-size:2.5rem;font-weight:900;color:var(--primary);">₹<span id="monthly-price">100</span></div>
+                        <button class="btn btn-primary" onclick="addToCart(1)" style="width:100%;margin-top:1rem;">Start Trial</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CART -->
+    <div id="cart" class="page">
+        <div class="container">
+            <button class="btn btn-outline" onclick="showPage('home')" style="margin-bottom:2rem;">← Continue Shopping</button>
+            <div class="card">
+                <h1 style="font-size:2.5rem;">🛒 Shopping Cart</h1>
+                <div id="cart-items" style="min-height:200px;"></div>
+                <div class="cart-total" id="cart-total">₹0</div>
+                <div style="display:flex;gap:1rem;justify-content:center;margin-top:2rem;flex-wrap:wrap;">
+                    <button class="btn btn-outline" onclick="clearCart()" id="clear-cart-btn" style="display:none;">🗑️ Clear Cart</button>
+                    <button class="btn btn-success" id="checkout-btn" onclick="showPage('checkout')" disabled style="font-size:1.1rem;">✅ Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHECKOUT -->
+    <div id="checkout" class="page">
+        <div class="container">
+            <button class="btn btn-outline" onclick="showPage('cart')" style="margin-bottom:2rem;">← Edit Cart</button>
+            <div class="card">
+                <h1 style="font-size:2.5rem;margin-bottom:2rem;">Complete Order</h1>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+                    <div>
+                        <h2 style="margin-bottom:1.5rem;">👤 Your Details</h2>
+                        <div class="form-group"><input type="text" id="customer-name" placeholder="Full Name *"></div>
+                        <div class="form-group"><input type="tel" id="customer-whatsapp" placeholder="WhatsApp Number *" required></div>
+                        <div class="form-group"><textarea id="customer-address" rows="4" placeholder="Delivery Address *"></textarea></div>
+                    </div>
+                    <div>
+                        <h2 style="margin-bottom:1.5rem;">📋 Order Summary</h2>
+                        <div id="checkout-items" style="margin-bottom:2rem;"></div>
+                        <div style="font-size:2rem;font-weight:700;color:var(--primary);text-align:right;margin-bottom:2rem;">
+                            Total: <span id="checkout-total">₹0</span>
+                        </div>
+                        <button class="btn btn-whatsapp" onclick="whatsappOrder()" style="width:100%;margin-bottom:1rem;">📱 WhatsApp Order</button>
+                        <button class="btn btn-success" onclick="completePurchase()" style="width:100%;">💳 Complete Purchase</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // GLOBAL STATE
+        let currentUser = null;
+        let currentProduct = null;
+        let cartItems = [];
+        let sessionId = 'BLR_' + Date.now();
+        let currentFilter = 'all';
+
+        // PUBLICATIONS DATA
+        const publications = [
+            {id:1, name:'The Hindu', price:220, image:'https://via.placeholder.com/340x240/1e293b/ffffff?text=THE+HINDU', category:'newspaper', type:'📰 English National'},
+            {id:2, name:'Times of India', price:200, image:'https://via.placeholder.com/340x240/f97316/ffffff?text=TIMES+OF+INDIA', category:'newspaper', type:'📰 English Local'},
+            {id:3, name:'Vijaya Karnataka', price:180, image:'https://via.placeholder.com/340x240/ef4444/ffffff?text=VIJAYA+KARNATAKA', category:'newspaper', type:'📰 Kannada Daily'},
+            {id:4, name:'Vijaya Vani', price:180, image:'https://via.placeholder.com/340x240/f59e0b/ffffff?text=VIJAYA+VANI', category:'newspaper', type:'📰 Kannada News'},
+            {id:5, name:'Economic Times', price:220, image:'https://via.placeholder.com/340x240/1e40af/ffffff?text=ECONOMIC+TIMES', category:'newspaper', type:'📰 Business News'},
+            {id:6, name:'Sudha Magazine', price:100, image:'https://via.placeholder.com/340x240/059669/ffffff?text=SUDHA', category:'magazine', type:'📚 Kannada Monthly'},
+            {id:7, name:'Taranga Magazine', price:150, image:'https://via.placeholder.com/340x240/8b5cf6/ffffff?text=TARANGA', category:'magazine', type:'📚 Kannada Stories'}
+        ];
+
+        // GA4 TRACKING
+        function trackGA4(eventName, params = {}) {
+            window.dataLayer = window.dataLayer || [];
+            const eventData = {
+                event: eventName,
+                session_id: sessionId,
+                user_id: currentUser ? currentUser.email : 'guest',
+                currency: 'INR',
+                value: params.value || 0,
+                ...params
+            };
+            dataLayer.push(eventData);
+            console.log('🚀 GA4 Event:', eventName, eventData);
+        }
+
+        // BROCHURE DOWNLOAD
+        function downloadBrochure() {
+            const content = `📰 BANGALORE NEWS AGENCY 2026 CATALOG
+
+📰 NEWSPAPERS (₹/month):
+• The Hindu ........ ₹220
+• Times of India ... ₹200  
+• Vijaya Karnataka ₹180
+• Vijaya Vani ...... ₹180
+• Economic Times .. ₹220
+
+📚 MAGAZINES (₹/month):
+• Sudha ............ ₹100
+• Taranga .......... ₹150
+
+💎 PLANS: 1/6/12 months (Save 10% on annual)
+✅ Bangalore wide delivery | Cancel anytime`;
+            
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'News-Agency-Catalog-2026.txt';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+            trackGA4('download_brochure', { file_name: 'catalog-2026.txt' });
+        }
+
+        // PAGE NAVIGATION
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            trackGA4('page_view', { page_title: pageId });
+            updateCartBadge();
+            window.scrollTo(0, 0);
+        }
+
+        // LOGIN
+        function login() {
+            const email = document.getElementById('login-email').value;
+            if (email) {
+                currentUser = { email };
+                trackGA4('login', { method: 'email' });
+                showPage('home');
+                filterProducts('all');
+            } else {
+                alert('Please enter phone/email');
+            }
+        }
+
+        // FILTER PRODUCTS
+        function filterProducts(type) {
+            currentFilter = type;
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.type === type);
+            });
+            
+            const filtered = type === 'all' ? publications : publications.filter(p => p.category === type);
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = filtered.map(product => `
+                <div class="product-card" onclick="viewProduct(${product.id})">
+                    <img src="${product.image}" class="product-image" alt="${product.name}" loading="lazy">
+                    <h3 class="product-title">${product.name}</h3>
+                    <div class="product-price">₹${product.price}</div>
+                    <div class="product-type">${product.type}</div>
+                </div>
+            `).join('');
+            
+            trackGA4('view_item_list', { 
+                item_list_id: type,
+                item_list_name: type === 'all' ? 'All Publications' : type.toUpperCase(),
+                items: filtered.map(p => ({ 
+                    item_id: p.id, 
+                    item_name: p.name, 
+                    price: p.price,
+                    item_category: p.category 
+                }))
+            });
+        }
+
+        // VIEW PRODUCT
+        function viewProduct(id) {
+            currentProduct = publications.find(p => p.id === id);
+            document.getElementById('product-title').textContent = currentProduct.name;
+            document.getElementById('product-image').src = currentProduct.image;
+            document.getElementById('product-price').textContent = `₹${currentProduct.price}`;
+            document.getElementById('product-desc').textContent = `${currentProduct.name} - ${currentProduct.type.includes('📰') ? 'Daily Newspaper' : 'Monthly Magazine'} | Bangalore Delivery`;
+            document.getElementById('monthly-price').textContent = currentProduct.price;
+            document.getElementById('offer-title').textContent = `${currentProduct.name} - Choose Plan`;
+            
+            trackGA4('view_item', {
+                item_id: currentProduct.id,
+                item_name: currentProduct.name,
+                price: currentProduct.price,
+                item_category: currentProduct.category
+            });
+            showPage('product-view');
+        }
+
+        // ADD TO CART
+        function addToCart(months) {
+            const total = currentProduct.price * months;
+            cartItems.push({
+                id: currentProduct.id,
+                name: currentProduct.name,
+                category: currentProduct.category,
+                months,
+                price: currentProduct.price,
+                total
+            });
+            
+            trackGA4('add_to_cart', {
+                item_id: currentProduct.id,
+                item_name: currentProduct.name,
+                item_category: currentProduct.category,
+                price: total,
+                quantity: 1
+            });
+            
+            alert('✅ Added to cart!');
+            updateCartUI();
+        }
+
+        // CART UI UPDATE
+        function updateCartUI() {
+            const totalItems = cartItems.length;
+            const totalPrice = cartItems.reduce((sum, item) => sum + item.total, 0);
+            
+            document.getElementById('cart-count').textContent = totalItems;
+            document.getElementById('cart-badge').style.display = totalItems ? 'flex' : 'none';
+            document.getElementById('cart-total').textContent = `₹${totalPrice.toLocaleString()}`;
+            document.getElementById('checkout-btn').disabled = !totalItems;
+            document.getElementById('clear-cart-btn').style.display = totalItems ? 'inline-flex' : 'none';
+            
+            document.getElementById('cart-items').innerHTML = totalItems ? 
+                cartItems.map((item, idx) => `
+                    <div class="cart-item">
+                        <div>
+                            <strong>${item.name}</strong> 
+                            <br><small style="color:var(--light);">${item.months} months | ₹${item.price} × ${item.months} = ₹${item.total.toLocaleString()}</small>
+                        </div>
+                        <div>
+                            ₹${item.total.toLocaleString()}
+                            <button onclick="removeFromCart(${idx})" style="margin-left:1rem;background:#ef4444;color:white;border:none;border-radius:8px;padding:0.5rem 1rem;cursor:pointer;font-size:0.9rem;">Remove</button>
+                        </div>
+                    </div>
+                `).join('') : 
+                '<div style="text-align:center;padding:3rem;color:var(--light);"><p>🛒 Your cart is empty</p><button class="btn btn-primary" onclick="showPage(\'home\')" style="margin-top:1rem;">Start Shopping</button></div>';
+            
+            document.getElementById('checkout-total').textContent = `₹${totalPrice.toLocaleString()}`;
+            document.getElementById('checkout-items').innerHTML = cartItems.map(item => 
+                `<div>${item.name} (${item.months}mo) - ₹${item.total.toLocaleString()}</div>`
+            ).join('');
+        }
+
+        function removeFromCart(index) {
+            const removedItem = cartItems[index];
+            cartItems.splice(index, 1);
+            trackGA4('remove_from_cart', { 
+                item_id: removedItem.id, 
+                item_name: removedItem.name 
+            });
+            updateCartUI();
+        }
+
+        function clearCart() {
+            cartItems = [];
+            trackGA4('clear_cart');
+            updateCartUI();
+        }
+
+        function whatsappOrder() {
+            const total = cartItems.reduce((sum, i) => sum + i.total, 0);
+            const name = document.getElementById('customer-name').value || 'Customer';
+            const whatsapp = document.getElementById('customer-whatsapp').value;
+            const address = document.getElementById('customer-address').value;
+            
+            if (!whatsapp) {
+                alert('Please enter WhatsApp number');
+                return;
+            }
+            
+            const message = `📰 BANGALORE NEWS AGENCY ORDER
+
+👤 ${name}
+📱 ${whatsapp}
+📍 ${address}
+
+🛒 ITEMS:
+${cartItems.map(i => `• ${i.name} (${i.months}mo) ₹${i.total}`).join('\n')}
+
+💰 TOTAL: ₹${total.toLocaleString()}
+✅ Bangalore delivery`;
+
+            trackGA4('begin_checkout', { value: total });
+            window.open(`https://wa.me/919845123456?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        function completePurchase() {
+            const total = cartItems.reduce((sum, i) => sum + i.total, 0);
+            const transactionId = 'TXN_' + Date.now();
+            
+            trackGA4('purchase', {
+                transaction_id: transactionId,
+                value: total,
+                currency: 'INR',
+                tax: total * 0.18,
+                items: cartItems.map(item => ({
+                    item_id: item.id,
+                    item_name: item.name,
+                    price: item.price,
+                    quantity: item.months
+                }))
+            });
+            
+            alert(`✅ Order Complete!\nID: ${transactionId}\nTotal: ₹${total.toLocaleString()}\n\nCheck GA4 DebugView! 🎉`);
+            cartItems = [];
+            updateCartUI();
+            showPage('home');
+        }
+
+        // SCROLL PROGRESS
+        window.addEventListener('scroll', () => {
+            const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+            document.getElementById('progress-bar').style.width = scrollPercent + '%';
+        });
+
+        // INIT
+        window.onload = function() {
+            filterProducts('all');
+            trackGA4('page_view', { page_title: 'Home' });
+            updateCartBadge();
+        };
+
+        function updateCartBadge() {
+            const totalItems = cartItems.length;
+            document.getElementById('cart-count').textContent = totalItems;
+            document.getElementById('cart-badge').style.display = totalItems ? 'flex' : 'none';
+        }
+    </script>
+</body>
+</html>
