@@ -507,5 +507,14 @@ ${cartItems.map(i => `• ${i.name} (${i.months}mo) ₹${i.total}`).join('\n')}
             document.getElementById('cart-badge').style.display = totalItems ? 'flex' : 'none';
         }
     </script>
+    <script>
+document.getElementById("checkout-btn").addEventListener("click", function() {
+  dataLayer.push({
+    event: "add_to_cart",
+    product_name: "Sample Product",
+    price: 500
+  });
+});
+</script>
 </body>
 </html>
